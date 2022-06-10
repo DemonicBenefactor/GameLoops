@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>60 FPS</title>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        let counter = document.getElementById("feedback");
+        feedback.innerHTML = "Starting";
+        let frame = 0;
+        window.requestAnimationFrame(gameLoop);
+        
+        function gameLoop(timeStamp)
+        {
+          //input();
+          //update();
+          //render();
+          frame++;
+          if(frame > 60){
+            frame = 0;
+            counter.innerHTML = timeStamp;
+          }
+          window.requestAnimationFrame(gameLoop);
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Counter</h1>
+    <p id="feedback"></p>
+  </body>
+</html>
