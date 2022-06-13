@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module GameLoop where
+module Main where
 
 import Data.Time
 

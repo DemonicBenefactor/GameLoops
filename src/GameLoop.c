@@ -9,23 +9,13 @@ void clockDelay(double delay, double *frameStart);
 
 int main(int argc, char *argv[]) {
   // init()
-  unsigned int i, j;
+  static int running = 1;
   double frameStart;
-  i = j = 0;
-
-  while (1) {
-    /*---MAIN LOOP START---*/
+  while (running) {
     frameStart = (double)clock();
-    ++i;
-    if (i > FPS) {
-      printf("%u \n", j);
-      i = 0;
-      j++;
-    }
     // events()
     // update()
     // render()
-    /*i---MAIN LOOP END---*/
     clockDelay((MSEC) / FPS, &frameStart);
   }
   return 0;
@@ -38,13 +28,3 @@ void clockDelay(double delay, double *frameStart) {
   }
 }
 
-/*time measures in seconds, not good for milliseconds*/
-void timeDelay(double delay) {
-  time_t begin, elapsed;
-  double diff = 0;
-  time(&begin);
-  while (diff < delay) {
-    time(&elapsed);
-    diff = difftime(elapsed, begin);
-  }
-}
