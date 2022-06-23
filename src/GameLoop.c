@@ -5,26 +5,32 @@
 #define FPS 60
 #define MSEC (double)CLOCKS_PER_SEC / 1000
 
-void clockDelay(double delay, double *frameStart);
+void render(int *count);
 
 int main(int argc, char *argv[]) {
   // init()
   static int running = 1;
-  double frameStart;
+  static int foo = 0;
+  double start, end;
+  int counter = 0;
   while (running) {
-    frameStart = (double)clock();
+    start = (double)clock();
     // events()
     // update()
-    // render()
-    clockDelay((MSEC) / FPS, &frameStart);
+    render(&counter);
+    do {
+      end = (double)clock();
+    } while ((end - start) / (MSEC) < (MSEC) / FPS);
   }
   return 0;
 }
 
-void clockDelay(double delay, double *frameStart) {
-  double frameTime = (double)clock();
-  while (frameTime / (MSEC) - *frameStart / (MSEC) < delay) {
-    frameTime = (double)clock();
+void render(int *count) {
+  static int foo;
+  foo++;
+  if (foo >= 60) {
+    printf("%d \n", *count);
+    *count += 1;
+    foo = 0;
   }
 }
-
